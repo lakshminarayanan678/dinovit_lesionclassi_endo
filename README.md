@@ -1,6 +1,4 @@
-Here's a comprehensive README file template for your project. You can modify it according to your specific needs and project details.
 
----
 
 # DinoVision Transformer Classifier
 
