@@ -89,6 +89,6 @@ for epoch in range(10):  # Adjust the number of epochs as needed
 print('Finished Training')
 
 # Save the model
-model_save_path = "./models/dino_vit_classifier_capsule.pth"
+model_save_path = "models/dino_vit_classifier_capsule.pth"
 torch.save(model.state_dict(), model_save_path)
 print(f"Model saved to {model_save_path}")
