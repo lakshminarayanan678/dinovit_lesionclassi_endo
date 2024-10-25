@@ -7,12 +7,32 @@ from torchvision import transforms
 from torchvision.datasets import ImageFolder
 from torch.utils.data import DataLoader
 
-# Load model function
+# load dino model
+dinov2_vits14 = torch.hub.load('facebookresearch/dinov2', 'dinov2_vits14')
+
+# Define the model architecture
+class DinoVisionTransformerClassifier(nn.Module):
+    def __init__(self):
+        super(DinoVisionTransformerClassifier, self).__init__()
+        self.transformer = dinov2_vits14  # Assuming dinov2_vits14 is already defined elsewhere
+        self.classifier = nn.Sequential(
+            nn.Linear(384, 256),
+            nn.ReLU(),
+            nn.Linear(256, 10)  # Adjust the number of classes as needed
+        )
+    
+    def forward(self, x):
+        x = self.transformer(x)
+        x = self.transformer.norm(x)
+        x = self.classifier(x)
+        return x
+
+# Load the model
 def load_model(model_path, device):
-    model = YourModelClass()  # Replace with your actual model class
+    model = DinoVisionTransformerClassifier()
     model.load_state_dict(torch.load(model_path, map_location=device))
-    model.to(device)
-    return model
+    model.eval()  # Set to evaluation mode
+    return model.to(device)
 
 # Function to save predictions to Excel
 def save_predictions_to_excel(image_paths, y_pred, output_path):
