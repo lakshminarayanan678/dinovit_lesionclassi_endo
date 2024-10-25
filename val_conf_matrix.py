@@ -124,8 +124,8 @@ def get_label_for_image(image_path):
 
 if __name__ == "__main__":
     # Define paths
-    model_save_path = "./models/dino_vit_classifier_capsule.pth"
-    validation_image_folder = r'C:\Users\srika\Downloads\Dataset-challnge\test'
+    model_save_path = "models/dino_vit_classifier_capsule.pth"
+    validation_image_folder = 'Dataset-challnge/test'
     output_path = 'submission_val_predictions.csv'
 
     # Setup device
