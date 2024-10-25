@@ -6,6 +6,7 @@ import json
 from torchvision import transforms
 from torchvision.datasets import ImageFolder
 from torch.utils.data import DataLoader
+import torch.nn as nn
 
 # load dino model
 dinov2_vits14 = torch.hub.load('facebookresearch/dinov2', 'dinov2_vits14')
