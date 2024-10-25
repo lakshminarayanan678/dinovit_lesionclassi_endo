@@ -78,7 +78,7 @@ def make_predictions(model, image_paths, device):
     return all_labels, np.array(all_predictions), class_columns
 
 # Save predictions in the desired format
-def save_predictions_to_csv(image_paths, predictions, class_columns, output_path):
+def save_predictions_to_excel(image_paths, predictions, class_columns, output_path):
     df_prob = pd.DataFrame(predictions, columns=class_columns)
     df_prob.insert(0, 'image_path', image_paths)
     
@@ -86,7 +86,7 @@ def save_predictions_to_csv(image_paths, predictions, class_columns, output_path
     predicted_class_names = [class_columns[i] for i in y_pred_classes]
     df_prob['predicted_class'] = predicted_class_names
     
-    df_prob.to_csv(output_path, index=False)
+    df_prob.to_excel(output_path, index=False)  # Save as Excel file
 
 # Plot confusion matrix
 def plot_confusion_matrix(y_true, y_pred, class_names, normalize=False):
@@ -126,7 +126,7 @@ if __name__ == "__main__":
     # Define paths
     model_save_path = "models/dino_vit_classifier_capsule.pth"
     validation_image_folder = 'Dataset-challnge/test'
-    output_path = 'submission_val_predictions.csv'
+    output_path = 'submission_val_predictions.xlsx'  # Change to .xlsx
 
     # Setup device
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -140,8 +140,8 @@ if __name__ == "__main__":
     # Make predictions
     all_labels, all_predictions, class_columns = make_predictions(model, image_paths, device)
 
-    # Save predictions to CSV
-    save_predictions_to_csv(image_paths, all_predictions, class_columns, output_path)
+    # Save predictions to Excel
+    save_predictions_to_excel(image_paths, all_predictions, class_columns, output_path)
 
     # Generate classification report and confusion matrix
     generate_classification_report_and_confusion_matrix(all_labels, all_predictions, class_columns, normalize_cm=True)
