@@ -119,12 +119,12 @@ data_transforms = transforms.Compose([
 ])
 
 # Load dataset and create DataLoader
-test_dataset = ImageFolder(root='path_to_test_data', transform=data_transforms)  # Adjust path
+test_dataset = ImageFolder(root='Dataset-challnge/test', transform=data_transforms)  # Adjust path
 test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
 
 # Load model
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-model_save_path = "./models/dino_vit_classifier_capsule.pth"
+model_save_path = "models/dino_vit_classifier_capsule.pth"
 model = load_model(model_save_path, device)
 
 # Set to evaluation mode

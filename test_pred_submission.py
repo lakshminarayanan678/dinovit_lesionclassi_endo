@@ -68,8 +68,8 @@ def make_predictions(model, image_paths, device):
 
     return all_image_paths, np.array(all_predictions), class_columns
 
-# Save predictions in the desired format
-def save_predictions_to_csv(image_paths, predictions, class_columns, output_path):
+# Save predictions in the desired format (Excel)
+def save_predictions_to_excel(image_paths, predictions, class_columns, output_path):
     df_prob = pd.DataFrame(predictions, columns=class_columns)
     df_prob.insert(0, 'image_path', image_paths)
     
@@ -77,13 +77,13 @@ def save_predictions_to_csv(image_paths, predictions, class_columns, output_path
     predicted_class_names = [class_columns[i] for i in y_pred_classes]
     df_prob['predicted_class'] = predicted_class_names
     
-    df_prob.to_csv(output_path, index=False)
+    df_prob.to_excel(output_path, index=False, engine='openpyxl')
 
 if __name__ == "__main__":
     # Define paths
-    model_save_path = "./models/dino_vit_classifier_capsule.pth"
-    test_image_folder = r'Testing set\Testing set\Images'
-    output_path = 'submission_capsule.csv'
+    model_save_path = "models/dino_vit_classifier_capsule.pth"
+    test_image_folder = 'Testing set/Testing set/Images'
+    output_path = 'submission_capsule.xlsx'  # Changed to .xlsx
 
     # Setup device
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -97,7 +97,7 @@ if __name__ == "__main__":
     # Make predictions
     all_image_paths, all_predictions, class_columns = make_predictions(model, image_paths, device)
 
-    # Save predictions to CSV
-    save_predictions_to_csv(all_image_paths, all_predictions, class_columns, output_path)
+    # Save predictions to Excel
+    save_predictions_to_excel(all_image_paths, all_predictions, class_columns, output_path)
 
     print(f"Predictions saved to {output_path}")
