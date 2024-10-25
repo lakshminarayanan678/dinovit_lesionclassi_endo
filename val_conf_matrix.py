@@ -9,15 +9,18 @@ from PIL import Image
 import torch.nn as nn
 from sklearn.metrics import classification_report, confusion_matrix
 
+# load dino model
+dinov2_vits14 = torch.hub.load('facebookresearch/dinov2', 'dinov2_vits14')
+
 # Define the model architecture
 class DinoVisionTransformerClassifier(nn.Module):
     def __init__(self):
         super(DinoVisionTransformerClassifier, self).__init__()
-        self.transformer = dinov2_vits14  # Assuming dinov2_vits14 is defined elsewhere
+        self.transformer = dinov2_vits14  # Assuming dinov2_vits14 is already defined elsewhere
         self.classifier = nn.Sequential(
             nn.Linear(384, 256),
             nn.ReLU(),
-            nn.Linear(256, 10)  # Adjust for the number of classes
+            nn.Linear(256, 10)  # Adjust the number of classes as needed
         )
     
     def forward(self, x):
