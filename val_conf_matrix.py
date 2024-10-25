@@ -118,9 +118,25 @@ def generate_classification_report_and_confusion_matrix(y_true, y_pred_proba, cl
 
 # Placeholder function to get the label for an image
 def get_label_for_image(image_path):
-    # Implement your logic to fetch the label for the image based on its path or filename
-    # For instance, you might parse the filename or use a mapping from a separate file
-    return 0  # Replace with actual label retrieval logic
+    # Get the directory name (class label) from the image path
+    class_label = os.path.basename(os.path.dirname(image_path))
+    
+    # Define a mapping from class labels to integer values
+    label_map = {
+        'Angioectasia': 0,
+        'Bleeding': 1,
+        'Erosion': 2,
+        'Erythema': 3,
+        'Foreign Body': 4,
+        'Lymphangiectasia': 5,
+        'Normal': 6,
+        'Polyp': 7,
+        'Ulcer': 8,
+        'Worms': 9
+    }
+    
+    # Return the mapped label, or -1 if the label is not found
+    return label_map.get(class_label, -1)
 
 if __name__ == "__main__":
     # Define paths
