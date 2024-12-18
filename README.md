@@ -1,10 +1,14 @@
+Here's the updated README with information about the 1st rank and the citation:
 
+---
 
 # DinoVision Transformer Classifier
 
 ## Overview
 
-The DinoVision Transformer Classifier is a machine learning project that utilizes the Vision Transformer architecture to classify images into different medical categories. The project is built using PyTorch and leverages transfer learning techniques with the DinoV2 model for feature extraction and classification tasks.
+The DinoVision Transformer Classifier is a machine learning project that utilizes the Vision Transformer architecture to classify images into different medical categories. The project is built using PyTorch and leverages transfer learning techniques with the DinoV2 model for feature extraction and classification tasks. 
+
+**This project achieved 1st place in the Capsule Vision 2024 Challenge: Multi-Class Abnormality Classification for Video Capsule Endoscopy, hosted by CVIP 2024, organized by Danube Private University Austria (DPU), @CVIP 2024 @MISAHUB 🏢, and @Indian Institute of Information Technology, Design and Manufacturing, Jabalpur.**
 
 ## Table of Contents
 
@@ -17,6 +21,7 @@ The DinoVision Transformer Classifier is a machine learning project that utilize
 - [Results](#results)
 - [Contributing](#contributing)
 - [License](#license)
+- [Citation](#citation)
 
 ## Project Structure
 
@@ -57,10 +62,6 @@ DinoVisionTransformerClassifier/
    ```bash
    pip install -r requirements.txt
    ```
-
-Here's an updated **Usage** section for the README file, specifically referencing the four Python files you've created: `train_model.py`, `test_pred_submission.py`, `val_conf_matrix.py`, and `val_scores.py`.
-
----
 
 ## Usage
 
@@ -145,3 +146,22 @@ Contributions are welcome! If you have suggestions for improvements, please fork
 
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
+## Citation
+
+If you use this work, please cite it as:
+
+```
+@misc{handa2024capsulevision2024challenge,
+      title={Capsule Vision 2024 Challenge: Multi-Class Abnormality Classification for Video Capsule Endoscopy}, 
+      author={Palak Handa and Amirreza Mahbod and Florian Schwarzhans and Ramona Woitek and Nidhi Goel and Manas Dhir and Deepti Chhabra and Shreshtha Jha and Pallavi Sharma and Vijay Thakur and Deepak Gunjan and Jagadeesh Kakarla and Balasubramanian Raman},
+      year={2024},
+      eprint={2408.04940},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2408.04940}, 
+}
+``` 
+
+---
+
+Let me know if you'd like further modifications!
