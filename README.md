@@ -1,6 +1,5 @@
-Here's the updated README with information about the 1st rank and the citation:
 
----
+
 
 # DinoVision Transformer Classifier
 
@@ -162,6 +161,4 @@ If you use this work, please cite it as:
 }
 ``` 
 
----
 
-Let me know if you'd like further modifications!
