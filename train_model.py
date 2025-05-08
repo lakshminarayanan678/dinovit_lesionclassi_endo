@@ -36,7 +36,7 @@ def main():
         ]),
     }
 
-    data_dir = 'Dataset-challnge/'  # Update the path as needed
+    data_dir = '/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/data1/data/capsulevision'  # Update the path as needed
     image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x), data_transforms[x]) for x in ['train', 'test']}
     dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], batch_size=64, shuffle=True, num_workers=4) for x in ['train', 'test']}
     dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'test']}
@@ -54,7 +54,7 @@ def main():
             self.classifier = nn.Sequential(
                 nn.Linear(384, 256),
                 nn.ReLU(),
-                nn.Linear(256, 10)  # Change to the number of classes in your dataset
+                nn.Linear(256, 3)  # Change to the number of classes in your dataset
             )
         
         def forward(self, x):
@@ -72,7 +72,7 @@ def main():
     optimizer = optim.Adam(model.parameters(), lr=0.000001)
 
     # Training loop
-    for epoch in range(10):  # Adjust the number of epochs as needed
+    for epoch in range(5):  # Adjust the number of epochs as needed
         running_loss = 0.0
         for i, data in enumerate(dataloaders["train"], 0):
             inputs, labels = data
@@ -90,7 +90,7 @@ def main():
     print('Finished Training')
 
     # Save the model
-    model_save_path = "models/dino_vit_classifier_capsule.pth"
+    model_save_path = "models/OURS_dino_vit_classifier_capsule.pth"
     torch.save(model.state_dict(), model_save_path)
     print(f"Model saved to {model_save_path}")
 
