@@ -1,0 +1,10 @@
+Classification Report
+              precision    recall  f1-score   support
+
+     Erosion       0.92      0.89      0.91       980
+      Normal       0.99      0.99      0.99      8752
+      Ulcers       0.97      0.91      0.94       373
+
+    accuracy                           0.98     10105
+   macro avg       0.96      0.93      0.94     10105
+weighted avg       0.98      0.98      0.98     10105

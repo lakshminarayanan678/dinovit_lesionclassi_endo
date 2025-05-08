@@ -20,7 +20,7 @@ class DinoVisionTransformerClassifier(nn.Module):
         self.classifier = nn.Sequential(
             nn.Linear(384, 256),
             nn.ReLU(),
-            nn.Linear(256, 10)  # Adjust the number of classes as needed
+            nn.Linear(256, 3)  # Adjust the number of classes as needed
         )
     
     def forward(self, x):
@@ -44,12 +44,12 @@ data_transforms = transforms.Compose([
 ])
 
 # Load dataset and create DataLoader
-val_dataset = ImageFolder(root='Dataset-challnge/test', transform=data_transforms)  # Adjust path
+val_dataset = ImageFolder(root='/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/data1/data/capsulevision/test', transform=data_transforms)  # Adjust path
 val_loader = DataLoader(val_dataset, batch_size=64, shuffle=False)
 
 # Load model
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-model_save_path = "models/dino_vit_classifier_capsule.pth"
+model_save_path = "/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/models/OURS_dino_vit_classifier_capsule.pth"
 model = load_model(model_save_path, device)
 
 # Set to evaluation mode
@@ -76,14 +76,30 @@ all_labels = np.concatenate(all_labels)
 conf_matrix = confusion_matrix(all_labels, all_predictions)
 conf_matrix_normalized = conf_matrix.astype('float') / conf_matrix.sum(axis=1)[:, np.newaxis]
 
+# Plot and save actual confusion matrix
+plt.figure(figsize=(10, 8))
+sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Greens',
+            xticklabels=val_dataset.classes, yticklabels=val_dataset.classes)
+plt.title('Actual Confusion Matrix')
+plt.ylabel('True Label')
+plt.xlabel('Predicted Label')
+plt.savefig("/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/Epoch5_results/confusion_matrix_actual.png", dpi=300, bbox_inches='tight')
+plt.show()
+
+# Plot and save normalized confusion matrix
 plt.figure(figsize=(10, 8))
 sns.heatmap(conf_matrix_normalized, annot=True, fmt='.2f', cmap='Blues',
             xticklabels=val_dataset.classes, yticklabels=val_dataset.classes)
 plt.title('Normalized Confusion Matrix')
 plt.ylabel('True Label')
 plt.xlabel('Predicted Label')
+plt.savefig("/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/Epoch5_results/confusion_matrix_normalized.png", dpi=300, bbox_inches='tight')
 plt.show()
+
 
 # Generate classification report
 class_report = classification_report(all_labels, all_predictions, target_names=val_dataset.classes)
 print("Classification Report:\n", class_report)
+with open("/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/Epoch5_results/classification_report.txt", "w") as f:
+    f.write("Classification Report\n")
+    f.write(class_report)

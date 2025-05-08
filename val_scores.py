@@ -19,7 +19,7 @@ class DinoVisionTransformerClassifier(nn.Module):
         self.classifier = nn.Sequential(
             nn.Linear(384, 256),
             nn.ReLU(),
-            nn.Linear(256, 10)  # Adjust the number of classes as needed
+            nn.Linear(256, 3)  # Adjust the number of classes as needed
         )
     
     def forward(self, x):
@@ -39,7 +39,10 @@ def load_model(model_path, device):
 def save_predictions_to_excel(image_paths, y_pred, output_path):
     class_columns = ['Angioectasia', 'Bleeding', 'Erosion', 'Erythema', 'Foreign Body', 'Lymphangiectasia', 'Normal', 'Polyp', 'Ulcer', 'Worms']
     y_pred_classes = np.argmax(y_pred, axis=1)
+    print("y_pred:", y_pred)
+    print("y_pred_classes",y_pred_classes)
     predicted_class_names = [class_columns[i] for i in y_pred_classes]
+    print("predicted_class_names", predicted_class_names)
     df_prob = pd.DataFrame(y_pred, columns=class_columns)
     df_prob.insert(0, 'image_path', image_paths)
     df_class = pd.DataFrame({'image_path': image_paths, 'predicted_class': predicted_class_names})
