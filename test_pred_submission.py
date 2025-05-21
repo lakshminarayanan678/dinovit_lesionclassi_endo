@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 dinov2_vits14 = torch.hub.load('facebookresearch/dinov2', 'dinov2_vits14')
 
 # Define class labels (based on folder names)
-class_columns = ['Erosion', 'Normal', 'Ulcer']
+class_columns = ['Erosion', 'Normal', 'Ulcers']
 
 # Define the model architecture
 class DinoVisionTransformerClassifier(nn.Module):
@@ -149,10 +149,10 @@ def plot_and_save_confusion_matrices(true_labels, pred_labels, class_columns, ou
     print(f"Normalized confusion matrix saved to {norm_img_path} and .csv")
 
 if __name__ == "__main__":
-    model_path = "/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/models/OURS_50epochs_dino_vit_classifier_capsule.pth"
-    test_image_root = '/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/data1/capsulevision/testing1'  # folder with subfolders as class names
-    excel_output_path = "/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/Epoch50_results/test/Test_results.xlsx"
-    cm_output_dir = "/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/Epoch50_results/test"
+    model_path = "/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/models/OURS_Split_50epochs_dino_vit_classifier_capsule.pth"
+    test_image_root = '/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/data1/split_data/test_code (copy)/val'  # folder with subfolders as class names
+    excel_output_path = "/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/Split_Epoch50_results/test/Test_results.xlsx"
+    cm_output_dir = "/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/Split_Epoch50_results/test"
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     model = load_model(model_path, device)

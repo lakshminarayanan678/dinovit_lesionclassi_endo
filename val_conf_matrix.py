@@ -44,12 +44,12 @@ data_transforms = transforms.Compose([
 ])
 
 # Load dataset and create DataLoader
-val_dataset = ImageFolder(root='/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/data1/data/capsulevision/test', transform=data_transforms)  # Adjust path
+val_dataset = ImageFolder(root='/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/data1/split_data/train_val/test', transform=data_transforms)  # Adjust path
 val_loader = DataLoader(val_dataset, batch_size=64, shuffle=False)
 
 # Load model
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-model_save_path = "/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/models/OURS_dino_vit_classifier_capsule.pth"
+model_save_path = "/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/models/OURS_Split_50epochs_dino_vit_classifier_capsule.pth"
 model = load_model(model_save_path, device)
 
 # Set to evaluation mode
@@ -83,7 +83,7 @@ sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Greens',
 plt.title('Actual Confusion Matrix')
 plt.ylabel('True Label')
 plt.xlabel('Predicted Label')
-plt.savefig("/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/Epoch5_results/confusion_matrix_actual.png", dpi=300, bbox_inches='tight')
+plt.savefig("/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/Split_Epoch50_results/val/confusion_matrix_actual.png", dpi=300, bbox_inches='tight')
 plt.show()
 
 # Plot and save normalized confusion matrix
@@ -93,13 +93,13 @@ sns.heatmap(conf_matrix_normalized, annot=True, fmt='.2f', cmap='Blues',
 plt.title('Normalized Confusion Matrix')
 plt.ylabel('True Label')
 plt.xlabel('Predicted Label')
-plt.savefig("/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/Epoch5_results/confusion_matrix_normalized.png", dpi=300, bbox_inches='tight')
+plt.savefig("/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/Split_Epoch50_results/val/confusion_matrix_normalized.png", dpi=300, bbox_inches='tight')
 plt.show()
 
 
 # Generate classification report
 class_report = classification_report(all_labels, all_predictions, target_names=val_dataset.classes)
 print("Classification Report:\n", class_report)
-with open("/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/Epoch5_results/classification_report.txt", "w") as f:
+with open("/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/Split_Epoch50_results/val/classification_report.txt", "w") as f:
     f.write("Classification Report\n")
     f.write(class_report)
