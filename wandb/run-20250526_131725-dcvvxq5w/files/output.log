@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/train_model.py", line 124, in <module>
+    main()
+  File "/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/train_model.py", line 37, in main
+    dataset_artifact.add_dir('/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/data1/split_data/train_val')
+  File "/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/dinovit/lib/python3.8/site-packages/wandb/sdk/artifacts/_validators.py", line 235, in wrapper
+    return method(self, *args, **kwargs)
+  File "/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/dinovit/lib/python3.8/site-packages/wandb/sdk/artifacts/artifact.py", line 1449, in add_dir
+    raise ValueError("Path is not a directory: {}".format(local_path))
+ValueError: Path is not a directory: /home/endodl/PHASE-1/mln/lesions_cv24/MAIN/data1/split_data/train_val

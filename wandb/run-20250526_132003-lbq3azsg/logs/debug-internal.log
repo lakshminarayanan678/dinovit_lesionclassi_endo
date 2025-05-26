@@ -1,0 +1,7 @@
+{"time":"2025-05-26T13:20:03.276095932+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.11","symlink path":"/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/wandb/run-20250526_132003-lbq3azsg/logs/debug-core.log"}
+{"time":"2025-05-26T13:20:03.676750727+05:30","level":"INFO","msg":"created new stream","id":"lbq3azsg"}
+{"time":"2025-05-26T13:20:03.67685144+05:30","level":"INFO","msg":"stream: started","id":"lbq3azsg"}
+{"time":"2025-05-26T13:20:03.676941234+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"lbq3azsg"}
+{"time":"2025-05-26T13:20:03.677089116+05:30","level":"INFO","msg":"handler: started","stream_id":"lbq3azsg"}
+{"time":"2025-05-26T13:20:03.677157839+05:30","level":"INFO","msg":"sender: started","stream_id":"lbq3azsg"}
+{"time":"2025-05-26T13:20:04.046386189+05:30","level":"INFO","msg":"Starting system monitor"}
