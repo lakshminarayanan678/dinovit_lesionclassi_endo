@@ -7,6 +7,7 @@ import os
 import torch.nn as nn
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
+import time
 
 # load dino model
 dinov2_vits14 = torch.hub.load('facebookresearch/dinov2', 'dinov2_vits14')
@@ -96,16 +97,31 @@ def make_predictions(model, image_paths, device, class_columns):
     predicted_classes = []
 
     data_transforms = get_transforms()
+    
+    total_time = 0.0
+
 
     with torch.no_grad():
         for img_path in image_paths:
             image = Image.open(img_path).convert('RGB')
             input_tensor = data_transforms(image).unsqueeze(0).to(device)
+            if device.type == 'cuda':
+                torch.cuda.synchronize()    
+            start_time = time.time()
             outputs = model(input_tensor)
+            if device.type == 'cuda':
+                torch.cuda.synchronize()
+            end_time = time.time()
+            inference_time = end_time - start_time
+            total_time += inference_time
             probabilities = torch.softmax(outputs, dim=1).cpu().numpy()
             predicted_class = np.argmax(probabilities, axis=1)
             predicted_classes.append(class_columns[predicted_class[0]])
             all_predictions.append(probabilities[0])
+            
+    avg_time_per_image = (total_time / len(image_paths)) * 1000 
+    print(f"Total inference time: {total_time:.2f} seconds")
+    print(f"Average inference time per image: {avg_time_per_image:.2f} ms")
 
     return predicted_classes, np.array(all_predictions)
 
@@ -150,7 +166,7 @@ def plot_and_save_confusion_matrices(true_labels, pred_labels, class_columns, ou
 
 if __name__ == "__main__":
     model_path = "/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/models/OURS_Split_50epochs_dino_vit_classifier_capsule.pth"
-    test_image_root = '/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/data1/split_data/test_code (copy)/val'  # folder with subfolders as class names
+    test_image_root = '/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/data1/data_old_mistake/testing'  # folder with subfolders as class names
     excel_output_path = "/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/Split_Epoch50_results/test/Test_results.xlsx"
     cm_output_dir = "/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/Split_Epoch50_results/test"
 
