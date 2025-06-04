@@ -13,7 +13,7 @@ import time
 dinov2_vits14 = torch.hub.load('facebookresearch/dinov2', 'dinov2_vits14')
 
 # Define class labels (based on folder names)
-class_columns = ['Erosion', 'Normal', 'Ulcers']
+class_columns = ['duodenalbulb', 'esophagus', 'pylorus', 'stomach', 'zline']
 
 # Define the model architecture
 class DinoVisionTransformerClassifier(nn.Module):
@@ -23,7 +23,7 @@ class DinoVisionTransformerClassifier(nn.Module):
         self.classifier = nn.Sequential(
             nn.Linear(384, 256),
             nn.ReLU(),
-            nn.Linear(256, 3)  # Adjust the number of classes as needed
+            nn.Linear(256, 5)  # Adjust the number of classes as needed
         )
     
     def forward(self, x):
@@ -165,10 +165,10 @@ def plot_and_save_confusion_matrices(true_labels, pred_labels, class_columns, ou
     print(f"Normalized confusion matrix saved to {norm_img_path} and .csv")
 
 if __name__ == "__main__":
-    model_path = "/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/models/OURS_Split_50epochs_dino_vit_classifier_capsule.pth"
-    test_image_root = '/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/data1/data_old_mistake/testing'  # folder with subfolders as class names
-    excel_output_path = "/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/Split_Epoch50_results/test/Test_results.xlsx"
-    cm_output_dir = "/home/endodl/PHASE-1/mln/lesions_cv24/MAIN/codes/Capsule-Challenge-2024/Split_Epoch50_results/test"
+    model_path = "/home/endodl/PHASE-1/mln/anatomical/anatomical_stomach/anat_dinovit/results/Anatomical_75epochs_dino_vit.pth"
+    test_image_root = '/home/endodl/PHASE-1/mln/anatomical/test'  # folder with subfolders as class names
+    excel_output_path = "/home/endodl/PHASE-1/mln/anatomical/anatomical_stomach/anat_dinovit/results/Test_results.xlsx"
+    cm_output_dir = "/home/endodl/PHASE-1/mln/anatomical/anatomical_stomach/anat_dinovit/results"
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     model = load_model(model_path, device)
