@@ -1,2 +1,3 @@
 OURS_50epochs_dinovot_classifier_capsule.pth
 OURS_Split_50epochs_dinovot_classifier_capsule.pth
+There r the weights that need to be used for finetuning and reproducing
